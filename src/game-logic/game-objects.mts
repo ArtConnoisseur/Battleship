@@ -187,36 +187,55 @@ export function Gameboard(dimensions: number = 10): GameboardTypes {
     //   - false: The attack missed.
     //   - -1: The attacked location has already been hit.
     const receiveAttack = ({ x, y }: GameboardCoordinates): boolean | number => {
-        const location = gameboard[y][x];
+        // Create a new cell object to avoid mutating the entire row
+        const cellCopy = { ...gameboard[y][x] };
 
-        // // If the cell is occupied by a ship and hasn't been hit yet
-        // if (location.cellType === GameboardCell.OCCUPIED && location.ship) {
-        //     const { ship } = location;
-        //     if (location.cellType !== GameboardCell.HIT) {
-        //         // Calculate the hit position based on the ship's orientation
-        //         const hitPosition = ship.orientation === Orientation.VERTICAL
-        //             ? y - location.head.y + 1
-        //             : x - location.head.x + 1;
-        //
-        //         // Try to hit the ship at the calculated position
-        //         if (ship.hit(hitPosition)) {
-        //             location.cellType = GameboardCell.HIT;
-        //             return true;
-        //         } else {
-        //             location.cellType = GameboardCell.MISS;
-        //             return false;
-        //         }
-        //     }
-        // }
-        //
-        // if (location.cellType === GameboardCell.OCCUPIED) {}
+        // Check if the coordinates are within the gameboard
+        if (x < 0 || x >= dimensions || y < 0 || y >= dimensions) {
+            return false; // Invalid coordinates
+        }
 
-        location.cellType = GameboardCell.MISS;
+        // Check if the cell has already been attacked
+        if (cellCopy.cellType === GameboardCell.HIT || cellCopy.cellType === GameboardCell.MISS) {
+            return -1; // Already attacked
+        }
+
+        // If the cell is occupied (has a ship)
+        if (cellCopy.cellType === GameboardCell.OCCUPIED) {
+            // Create a new cell object marked as hit
+            gameboard[y][x] = {
+                ...cellCopy,
+                cellType: GameboardCell.HIT
+            };
+
+            // Find the relative position of the hit within the ship
+            const relativePosition = cellCopy.ship.orientation === Orientation.VERTICAL
+                ? y - cellCopy.head.y + 1
+                : x - cellCopy.head.x + 1;
+
+            // Register the hit on the ship
+            cellCopy.ship.hit(relativePosition);
+
+            return true; // Successfully hit a ship
+        }
+
+        // If the cell is empty, mark only this specific cell as miss
+        if (cellCopy.cellType === GameboardCell.EMPTY) {
+            gameboard[y][x] = {
+                ...cellCopy,
+                cellType: GameboardCell.MISS
+            };
+            return false; // Missed all ships
+        }
+
+        return false;
     };
 
     const printGameboard = () => {
+        let gameboardString = '';
+
         for (const row of gameboard) {
-            const rowString = row.map(cell => {
+            gameboardString += row.map(cell => {
                     switch (cell.cellType) {
                         case GameboardCell.EMPTY:
                             return '•';
@@ -228,9 +247,10 @@ export function Gameboard(dimensions: number = 10): GameboardTypes {
                             return '?';
                     }
                 }
-            ).join(" ");
-            console.log(rowString);
+            ).join(" ") + '\n';
         }
+
+        console.log(gameboardString);
     };
 
     return {
