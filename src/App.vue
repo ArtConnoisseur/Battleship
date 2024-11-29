@@ -3,7 +3,8 @@
 </script>
 
 <template>
-  <main>
-    <RouterView/>
-  </main>
+    <main class="h-screen sticky inset-0 background">
+        <RouterView/>
+    </main>
 </template>
+
