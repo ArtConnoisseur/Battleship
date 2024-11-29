@@ -4,7 +4,7 @@ import {
     GameboardCell,
     Orientation,
     Ship
-} from '../game-logic/game-objects.mjs'
+} from '../game-logic/game-objects'
 
 // Tests for the gameboard object
 describe("Gameboard Function", () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { Ship, Orientation } from "../game-logic/game-objects.mjs";
+import { Ship, Orientation } from "../game-logic/game-objects";
 
 // Tests to test the ship
 describe("Ship Factory Function", () => {

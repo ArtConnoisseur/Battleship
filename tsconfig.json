@@ -11,6 +11,8 @@
   "compilerOptions": {
     "types": [
       "unplugin-vue-router/client"
-    ]
-  }
+    ],
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true
+  },
 }

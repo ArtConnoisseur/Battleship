@@ -23,7 +23,7 @@
         fill: url('#paint0_linear_34_1728');
     }
 
-    .play-container:hover .container-rectangle {
+    .container-rectangle {
         stroke-width: 5;
         stroke: hsla(var(--primary));
         stroke-dasharray: 200 3463;

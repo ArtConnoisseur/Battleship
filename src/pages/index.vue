@@ -6,8 +6,40 @@
     import ChippedContainer from '@/components/svg-components/ChippedContainer.vue'
     import Graph from '@/components/svg-components/Graph.vue'
     import Battery from '@/components/svg-components/Battery.vue'
-    import Progress from '@/components/svg-components/Progress.vue'
     import Scale from '@/components/svg-components/Scale.vue'
+
+    const nameList = [
+        'Time', 'Past', 'Future', 'Dev',
+        'Fly', 'Flying', 'Soar', 'Soaring', 'Power', 'Falling',
+        'Fall', 'Jump', 'Cliff', 'Mountain', 'Rend', 'Red', 'Blue',
+        'Green', 'Yellow', 'Gold', 'Demon', 'Demonic', 'Panda', 'Cat',
+        'Kitty', 'Kitten', 'Zero', 'Memory', 'Trooper', 'XX', 'Bandit',
+        'Fear', 'Light', 'Glow', 'Tread', 'Deep', 'Deeper', 'Deepest',
+        'Mine', 'Your', 'Worst', 'Enemy', 'Hostile', 'Force', 'Video',
+        'Game', 'Donkey', 'Mule', 'Colt', 'Cult', 'Cultist', 'Magnum',
+        'Gun', 'Assault', 'Recon', 'Trap', 'Trapper', 'Redeem', 'Code',
+        'Script', 'Writer', 'Near', 'Close', 'Open', 'Cube', 'Circle',
+        'Geo', 'Genome', 'Germ', 'Spaz', 'Shot', 'Echo', 'Beta', 'Alpha',
+        'Gamma', 'Omega', 'Seal', 'Squid', 'Money', 'Cash', 'Lord', 'King',
+        'Duke', 'Rest', 'Fire', 'Flame', 'Morrow', 'Break', 'Breaker', 'Numb',
+        'Ice', 'Cold', 'Rotten', 'Sick', 'Sickly', 'Janitor', 'Camel', 'Rooster',
+        'Sand', 'Desert', 'Dessert', 'Hurdle', 'Racer', 'Eraser', 'Erase', 'Big',
+        'Lie', 'Honest', 'Destined', 'Bloxxer', 'Hawk', 'Eagle', 'Hawker', 'Walker',
+        'Zombie', 'Sarge', 'Capt', 'Captain', 'Punch', 'One', 'Two', 'Uno', 'Slice',
+        'Slash', 'Melt', 'Melted', 'Melting', 'Fell', 'Wolf', 'Hound', 'Visons', 'Bad', 'Mad', 'Wise',
+        'Legacy', 'Sharp', 'Dead', 'Mew', 'Chuckle', 'Bubba', 'Bubble', 'Sandwich',
+        'Smasher', 'Extreme', 'Multi', 'Universe', 'Ultimate', 'Death', 'Ready', 'Monkey',
+        'Elevator', 'Wrench', 'Grease', 'Head', 'Theme', 'Grand', 'Cool', 'Kid', 'Boy', 'Girl',
+        'Vortex', 'Paradox'
+    ];
+
+    let generated_name = nameList[Math.floor(Math.random() * nameList.length)];
+
+    window.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            window.location = `/set-board/${generated_name.toLowerCase()}`
+        }
+    })
 </script>
 
 <template>
@@ -16,7 +48,7 @@
         class="w-full h-full fixed -z-10 inset-0"
         alt="background"
     />
-    <div class="left-[14%] absolute top-[7%] h-[420px] w-full flex gap-10 items-start">
+    <div class="left-[14%] absolute top-[7%] h-[420px]  box-border flex gap-10 items-start">
         <div class="flex flex-col w-fit gap-10 h-fit">
             <CoolCirclePrimary/>
             <CoolCircleAccent/>
@@ -36,15 +68,20 @@
             COMMANDER'S NAME:
         </h1>
         <input
-            type='text'
+            type="text"
             class="bg-transparent border-b-[1px] border-primary text-6xl text-primary uppercase focus:outline-none"
+            v-model="generated_name"
+            autofocus
         />
         <Scale/>
     </div>
     <HomepageBorders/>
     <div class="hero-text absolute bottom-[5%] left-[14%] flex items-baseline">
         BATTLESHIP
-        <PlayButton />
+        <a :href="`/set-board/${generated_name.toLowerCase()}`">
+            <PlayButton />
+        </a>
+
     </div>
 </template>
 
