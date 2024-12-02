@@ -48,7 +48,7 @@
         class="w-full h-full fixed -z-10 inset-0"
         alt="background"
     />
-    <div class="left-[14%] absolute top-[7%] h-[420px]  box-border flex gap-10 items-start">
+    <div class="left-[14%] absolute top-[7%] h-[420px] box-border flex gap-10 items-start justify-start">
         <div class="flex flex-col w-fit gap-10 h-fit">
             <CoolCirclePrimary/>
             <CoolCircleAccent/>

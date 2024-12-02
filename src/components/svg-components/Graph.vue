@@ -2,7 +2,8 @@
     <svg width="100%" height="100%" viewBox="0 0 1038 459" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="glass">
         <rect x="1" width="1036" height="458" fill="url(#pattern0_19_749)"/>
         <rect x="1.5" y="0.5" width="1035" height="457" stroke="#76D9C5" stroke-opacity="0.5"/>
-        <path d="M122.5 445.5C62.1 441.9 16.3333 416 1 403.5V458H1037C1025.67 439.833 988.5 403.5 930.5 403.5C858 403.5 809.5 38.5 744 38.5C678.5 38.5 649 424 589.5 424C530 424 532 314 479.5 314C427 314 406.5 91 350.5 91C294.5 91 198 450 122.5 445.5Z" fill="url(#paint0_linear_19_749)" stroke="#76D9C5" class="dash"/>
+        <path d="M122.5 445.5C62.1 441.9 16.3333 416 1 403.5V458H1037C1025.67 439.833 988.5 403.5 930.5 403.5C858 403.5 809.5 38.5 744 38.5C678.5 38.5 649 424 589.5 424C530 424 532 314 479.5 314C427 314 406.5 91 350.5 91C294.5 91 198 450 122.5 445.5Z" fill="url(#paint0_linear_19_749)" stroke="#76D9C5"/>
+        <path d="M1 403.5C16.3333 416 62.1 441.9 122.5 445.5C198 450 294.5 91 350.5 91C406.5 91 427 314 479.5 314C532 314 530 424 589.5 424C649 424 678.5 38.5 744 38.5C809.5 38.5 858 403.5 930.5 403.5C988.5 403.5 1025.67 439.833 1037 458" class="dash"/>
         <path d="M352 91L415.5 39H511M744.5 39H866.5L921 115M921 401L956.5 339H1027.5M497.5 316.5L538 261H627" stroke="#76D9C5"/>
         <path d="M193.584 28L232 1H2V28H193.584Z" fill="#76D9C5" fill-opacity="0.3"/>
         <defs>
@@ -18,6 +19,25 @@
     </svg>
 </template>
 
-<style scoped>
 
+<style scoped>
+    .dash {
+        stroke: hsla(var(--primary));
+        stroke-width: 10;
+        stroke-dasharray: 1 1971.22607421875;
+        stroke-linecap: round;
+        animation: trace 5s linear infinite;
+    }
+
+    @keyframes trace {
+        0% {
+            stroke-dashoffset: -10;
+        }
+
+        100% {
+            stroke-dashoffset: 1971.22607421875;
+        }
+    }
 </style>
+<script setup lang="ts">
+</script>
