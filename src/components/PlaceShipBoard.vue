@@ -1,12 +1,20 @@
 <script setup lang="ts">
-    import Cell from '@/components/Cell.vue'
-    import { GameboardCoordinates } from '@/game-logic/game-objects'
+import Cell from '@/components/Cell.vue'
 
-    const { gameboard } = defineProps(['gameboard']);
+import type { GameboardCoordinates } from '@/game-logic/game-objects'
+import { reactive } from 'vue'
 
-    function handleCoordinateHover( coordinates : GameboardCoordinates ) : void {
-        
-    }
+const { gameboard } = defineProps(['gameboard']);
+
+const currentHead : GameboardCoordinates = reactive({ x: 0, y: 0 });
+
+function handleEnterCell ( coordinates : GameboardCoordinates ) : void {
+    console.log( coordinates )
+}
+
+function handleLeaveCell ( coordinates : GameboardCoordinates ) : void {
+    console.log( coordinates )
+}
 </script>
 
 <template>
@@ -20,11 +28,11 @@
                 v-for="(cell, x) in row"
                 :key="`cell-${x}-${y}`"
                 :class="`h-[50px] flex place-content-center aspect-square`"
-                @hover=""
+                @mouseenter="() => handleEnterCell({ x, y })"
+                @mouseleave="() => handleLeaveCell({ x, y })"
             >
-                <Cell :cell-type="cell.cellType"/>
+                <Cell :cell-type="cell.cellType" />
             </div>
         </div>
     </div>
-    {{attacks}}
 </template>

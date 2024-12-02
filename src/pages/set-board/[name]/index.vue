@@ -4,8 +4,9 @@
 !-->
 
 <script setup lang="ts">
-    import { Gameboard as GameboardObject } from '@/game-logic/game-objects'
+import { Gameboard as GameboardObject, type GameboardCoordinates } from '@/game-logic/game-objects'
     import GameboardComponent from '@/components/PlaceShipBoard.vue'
+    import CellIndex from '@/components/svg-components/CellIndex.vue'
     import { Ship } from '@/game-logic/game-objects'
     import { reactive } from 'vue'
 
@@ -28,6 +29,9 @@
             It is time for you to place your ships strategically...
         </div>
         <GameboardComponent :gameboard="gameboard"/>
+    </div>
+    <div class="absolute top-10 left-10 w-[15%]">
+        <CellIndex/>
     </div>
     <img
         src="@/lib/general-bg.png"
